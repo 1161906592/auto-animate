@@ -1,0 +1,46 @@
+{
+  "name": "auto-animate",
+  "version": "1.0.0",
+  "description": "auto animate when dom change",
+  "main": "lib/index.js",
+  "module": "es/index.js",
+  "scripts": {
+    "build:cjs": "tsc --outDir lib --module commonjs",
+    "build:es": "tsc --outDir es --module esnext"
+  },
+  "exports": {
+    "./vue": {
+      "import": "./es/vue/index.js",
+      "types": "./es/vue/index.d.ts"
+    },
+    ".": {
+      "import": "./es/index.js"
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/1161906592/auto-animate.git"
+  },
+  "keywords": [
+    "FLIP",
+    "animation"
+  ],
+  "author": "liuyang<1161906592@qq.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/1161906592/auto-animate/issues"
+  },
+  "homepage": "https://github.com/1161906592/auto-animate#readme",
+  "devDependencies": {
+    "typescript": "^4.7.4",
+    "vue": "^3.2.37"
+  },
+  "peerDependencies": {
+    "vue": ">=3.0.0"
+  },
+  "peerDependenciesMeta": {
+    "vue": {
+      "optional": true
+    }
+  }
+}
