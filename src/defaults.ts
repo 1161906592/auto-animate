@@ -66,3 +66,7 @@ export function update(el: Element, oldRect: DOMRect, duration: number, easing: 
     })
   }
 }
+
+export const duration = 250
+
+export const easing = 'ease-in-out'

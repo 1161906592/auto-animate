@@ -23,3 +23,5 @@ export const vAutoAnimate: Directive = {
     autoAnimate(el, binding.value || {})
   },
 }
+
+export { CrossFlip } from "./CrossFlip"

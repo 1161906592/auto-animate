@@ -1,6 +1,6 @@
 {
   "name": "auto-animate",
-  "version": "1.0.0",
+  "version": "0.0.0",
   "description": "auto animate when dom change",
   "main": "lib/index.js",
   "module": "es/index.js",
