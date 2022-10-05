@@ -14,9 +14,9 @@
   },
   "exports": {
     "./vue": {
-      "types": "./dist/vue/index.d.ts",
-      "import": "./dist/vue/index.js",
-      "require": "./dist/vue/index.cjs"
+      "types": "./vue/index.d.ts",
+      "import": "./vue/index.js",
+      "require": "./vue/index.cjs"
     },
     ".": {
       "types": "./dist/index.d.ts",
@@ -35,7 +35,8 @@
   ],
   "sideEffects": false,
   "files": [
-    "dist"
+    "dist",
+    "vue"
   ],
   "author": "liuyang<1161906592@qq.com>",
   "license": "MIT",

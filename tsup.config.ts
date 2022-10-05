@@ -1,9 +1,19 @@
 import { defineConfig } from 'tsup'
 
-export default defineConfig({
-  entry: ['src/index.ts', 'src/vue/index.ts'],
-  dts: true,
-  format: ['cjs', 'esm'],
-  shims: true,
-  clean: true,
-})
+export default defineConfig([
+  {
+    entry: ['src/index.ts'],
+    dts: true,
+    format: ['cjs', 'esm'],
+    shims: true,
+    clean: true,
+  },
+  {
+    entry: ['src/vue/index.ts'],
+    dts: true,
+    format: ['cjs', 'esm'],
+    shims: true,
+    clean: true,
+    outDir: 'vue',
+  },
+])
