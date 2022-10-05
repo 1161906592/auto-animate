@@ -3,11 +3,11 @@ import { update as defaultUpdate, duration as defaultDuration, easing as default
 import type { Options } from '../types'
 import type { PropType } from 'vue'
 
-const rectMap = /* @__PURE__ */ new Map<string, DOMRect>()
+const rectMap = /* @__PURE__ */ new Map<string | symbol, DOMRect>()
 
 export const CrossFlip = /* @__PURE__ */ defineComponent({
   props: {
-    id: { type: String as PropType<string>, required: true },
+    id: { type: [String, Symbol] as PropType<string | symbol>, required: true },
     duration: { type: Number as PropType<number>, default: defaultDuration },
     easing: { type: String as PropType<Options['easing']>, default: defaultEasing },
     tag: { type: String as PropType<string>, default: 'div' },
