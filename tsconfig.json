@@ -1,23 +1,14 @@
 {
   "compilerOptions": {
-    "baseUrl": ".",
-    "sourceMap": false,
-    "target": "esnext",
-    "declaration": true,
-    "declarationMap": false,
-    "useDefineForClassFields": false,
-    "moduleResolution": "node",
-    "allowJs": false,
-    "strict": true,
-    "noUnusedLocals": true,
-    "experimentalDecorators": true,
-    "resolveJsonModule": true,
-    "esModuleInterop": true,
-    "isolatedModules": true,
-    "removeComments": false,
-    "skipLibCheck": true,
+    "target": "es2018",
+    "module": "esnext",
     "lib": ["esnext", "dom"],
-    "rootDir": "./src",
-  },
-  "include": ["src"],
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "strict": true,
+    "strictNullChecks": true,
+    "resolveJsonModule": true,
+    "skipLibCheck": true,
+    "skipDefaultLibCheck": true
+  }
 }

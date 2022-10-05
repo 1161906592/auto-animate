@@ -1,4 +1,4 @@
-import { getTransitionSizes } from "./utils"
+import { getTransitionSizes } from './utils'
 
 export function add(el: Element, duration: number) {
   return new KeyframeEffect(

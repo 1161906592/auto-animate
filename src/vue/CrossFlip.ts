@@ -1,6 +1,7 @@
-import { defineComponent, h, nextTick, onBeforeUnmount, onMounted, PropType, ref } from 'vue'
+import { defineComponent, h, nextTick, onBeforeUnmount, onMounted, ref } from 'vue'
 import { update as defaultUpdate, duration as defaultDuration, easing as defaultEasing } from '../defaults'
-import { Options } from '../types'
+import type { Options } from '../types'
+import type { PropType } from 'vue'
 
 const rectMap = /* @__PURE__ */ new Map<string, DOMRect>()
 

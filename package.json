@@ -1,20 +1,27 @@
 {
-  "name": "auto-animate",
+  "name": "@liuyang0826/auto-animate",
+  "type": "module",
   "version": "0.0.0",
   "description": "auto animate when dom change",
-  "main": "lib/index.js",
-  "module": "es/index.js",
+  "main": "dist/index.js",
+  "module": "dist/index.js",
   "scripts": {
-    "build:cjs": "tsc --outDir lib --module commonjs",
-    "build:es": "tsc --outDir es --module esnext"
+    "build": "tsup",
+    "release": "bumpp && npm publish"
+  },
+  "publishConfig": {
+    "access": "public"
   },
   "exports": {
     "./vue": {
-      "import": "./es/vue/index.js",
-      "types": "./es/vue/index.d.ts"
+      "types": "./dist/vue/index.d.ts",
+      "import": "./dist/vue/index.js",
+      "require": "./dist/vue/index.cjs"
     },
     ".": {
-      "import": "./es/index.js"
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
     }
   },
   "repository": {
@@ -23,7 +30,12 @@
   },
   "keywords": [
     "FLIP",
+    "vue",
     "animation"
+  ],
+  "sideEffects": false,
+  "files": [
+    "dist"
   ],
   "author": "liuyang<1161906592@qq.com>",
   "license": "MIT",
@@ -32,6 +44,11 @@
   },
   "homepage": "https://github.com/1161906592/auto-animate#readme",
   "devDependencies": {
+    "@liuyang0826/eslint-config": "^0.0.1",
+    "bumpp": "^8.2.1",
+    "eslint": "^8.24.0",
+    "prettier": "^2.7.1",
+    "tsup": "^6.2.3",
     "typescript": "^4.7.4",
     "vue": "^3.2.37"
   },

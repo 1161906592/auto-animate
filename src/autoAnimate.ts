@@ -1,11 +1,18 @@
-import type { Options } from "./types"
-import { add as defaultAdd, remove as defaultRemove, update as defaultUpdate } from "./defaults"
-import { deletePosition, diffElements } from "./utils"
+import type { Options } from './types'
+import {
+  add as defaultAdd,
+  remove as defaultRemove,
+  update as defaultUpdate,
+  duration as defaultDuration,
+  easing as defaultEasing,
+} from './defaults'
+import { patch } from './patch'
+import { deletePosition, diffElements } from './utils'
 
-export default function autoAnimate(el: HTMLElement, options?: Options) {
+export function autoAnimate(el: Element, options?: Options) {
   const {
-    duration = 250,
-    easing = 'ease-in-out',
+    duration = defaultDuration,
+    easing = defaultEasing,
     add = (el: Element) => defaultAdd(el, duration),
     remove = (el: Element) => defaultRemove(el, duration),
     update = (el: Element, oldRect: DOMRect) => defaultUpdate(el, oldRect, duration, easing),
@@ -14,15 +21,14 @@ export default function autoAnimate(el: HTMLElement, options?: Options) {
   let pending = false
   let animating = false
   let oldElementRectMap: Map<Element, DOMRect>
+  let isPaused = false
 
   const willChange = () => {
-    if (pending || animating) return
+    if (pending || animating || isPaused) return
     pending = true
     const oldElements = Array.from(el.children)
 
-    oldElementRectMap = new Map(
-      oldElements.map((item) => [item, item.getBoundingClientRect()])
-    )
+    oldElementRectMap = new Map(oldElements.map((item) => [item, item.getBoundingClientRect()]))
 
     requestAnimationFrame(() => {
       pending = false
@@ -75,29 +81,15 @@ export default function autoAnimate(el: HTMLElement, options?: Options) {
     })
   }
 
-  const appendChild = el.appendChild
-
-  el.appendChild = <T extends Node>(node: T): T => {
-    willChange()
-
-    return appendChild.call(el, node) as T
+  const pauseAnimate = () => {
+    isPaused = true
   }
 
-  const insertBefore = el.insertBefore
-
-  el.insertBefore = <T extends Node>(node: T, child: Node): T => {
-    willChange()
-
-    return insertBefore.call(el, node, child) as T
+  const continueAnimate = () => {
+    isPaused = false
   }
 
-  const removeChild = el.removeChild
+  patch(el, willChange)
 
-  el.removeChild = <T extends Node>(child: Node): T => {
-    willChange()
-
-    return removeChild.call(el, child) as T
-  }
-
-  return willChange
+  return { willChange, pauseAnimate, continueAnimate }
 }

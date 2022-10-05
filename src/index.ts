@@ -1,5 +1,5 @@
-export { getTransitionSizes } from "./utils"
+export { getTransitionSizes } from './utils'
 
-export type { Options } from "./types"
+export type { Options } from './types'
 
-export { default } from "./autoAnimate"
+export { autoAnimate } from './autoAnimate'
