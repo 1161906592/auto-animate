@@ -1,4 +1,4 @@
-import { getTransitionSizes } from './utils'
+import { getTransformValues, getTransitionSizes } from './utils'
 
 export function add(el: Element, duration: number) {
   return new KeyframeEffect(
@@ -42,12 +42,24 @@ export function update(el: Element, oldRect: DOMRect, duration: number, easing: 
   const [widthFrom, widthTo, heightFrom, heightTo] = getTransitionSizes(el, oldRect, newRect)
 
   if (deltaX || deltaY) {
-    const start: Keyframe = {
-      transform: `translate(${deltaX}px, ${deltaY}px)`,
-    }
+    const transform = getTransformValues(el)
+    let start: Keyframe
+    let end: Keyframe
 
-    const end: Keyframe = {
-      transform: `translate(0, 0)`,
+    if (transform) {
+      if (transform.type === 'matrix3d') {
+        transform.values[12] += deltaX
+        transform.values[13] += deltaY
+      } else {
+        transform.values[4] += deltaX
+        transform.values[5] += deltaY
+      }
+
+      start = { transform: `${transform.type}(${transform.values.join(',')})` }
+      end = { transform: transform.origin }
+    } else {
+      start = { transform: `translate(${deltaX}px, ${deltaY}px)` }
+      end = { transform: `translate(0, 0)` }
     }
 
     if (widthFrom !== widthTo) {

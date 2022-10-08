@@ -81,3 +81,18 @@ export function diffElements(oldElements: Element[], newElements: Element[]) {
     updateElements: Array.from(sameSet),
   }
 }
+
+export function getTransformValues(el: Element) {
+  const styles = getComputedStyle(el)
+  const transform = styles.getPropertyValue('transform')
+  if (transform === 'none') return
+  const matches = transform.match(/^(matrix3d)\((.+)\)$/) || transform.match(/^(matrix)\((.+)\)$/)
+
+  if (matches) {
+    return {
+      type: matches[1],
+      origin: transform,
+      values: matches[2].split(',').map(Number),
+    }
+  }
+}
