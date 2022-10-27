@@ -27,7 +27,7 @@ export function getTransitionSizes(el: Element, oldRect: DOMRect, newRect: DOMRe
     heightTo -= paddingY
   }
 
-  return [widthFrom, widthTo, heightFrom, heightTo].map(Math.round)
+  return [widthFrom, widthTo, heightFrom, heightTo]
 }
 
 export function deletePosition(el: Element, oldRect: DOMRect, newRect: DOMRect) {
