@@ -1,11 +1,11 @@
-import { defineComponent, createVNode } from 'vue'
+import { defineComponent, h } from 'vue'
 import type { PropType } from 'vue'
 import { useAutoAnimate } from './useAutoAnimate'
 
 export const EaseText = /* @__PURE__ */ defineComponent({
   props: {
-    text: [String, Number, null] as PropType<string | number | null>,
-    tag: { type: String as PropType<string>, default: 'div' },
+    text: [String, Number] as PropType<string | number | null>,
+    tag: { type: String as PropType<string>, default: 'span' },
   },
   setup(props) {
     const { rootRef } = useAutoAnimate({
@@ -23,7 +23,6 @@ export const EaseText = /* @__PURE__ */ defineComponent({
 
     const style = 'display: inline-block;vertical-align: middle;'
 
-    return () =>
-      createVNode(props.tag, { ref: rootRef, style }, props.text ? createVNode('span', { style }, props.text) : null)
+    return () => h(props.tag, { ref: rootRef, style }, props.text ? h('span', { style }, props.text) : undefined)
   },
 })
