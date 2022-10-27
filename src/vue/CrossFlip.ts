@@ -1,6 +1,10 @@
-import { defineComponent, h, nextTick, onBeforeUnmount, onMounted, ref } from 'vue'
-import { update as defaultUpdate, duration as defaultDuration, easing as defaultEasing } from '../defaults'
-import type { Options } from '../types'
+import { defineComponent, createVNode, nextTick, onBeforeUnmount, onMounted, ref } from 'vue'
+import {
+  update as defaultUpdate,
+  duration as defaultDuration,
+  easing as defaultEasing,
+} from '@liuyang0826/auto-animate'
+import type { Options } from '@liuyang0826/auto-animate'
 import type { PropType } from 'vue'
 
 const rectMap = /* @__PURE__ */ new Map<string | symbol, DOMRect>()
@@ -35,6 +39,6 @@ export const CrossFlip = /* @__PURE__ */ defineComponent({
       rectMap.delete(props.id)
     })
 
-    return () => h(props.tag, { ref: rootRef }, slots.default?.())
+    return () => createVNode(props.tag, { ref: rootRef }, slots.default?.())
   },
 })

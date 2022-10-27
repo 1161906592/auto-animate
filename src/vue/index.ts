@@ -1,28 +1,8 @@
-import { Plugin, ref, watch } from 'vue'
-import { autoAnimate } from '..'
-import type { Options } from '../types'
-import type { Directive } from 'vue'
+import { autoAnimate } from '@liuyang0826/auto-animate'
+import type { Options } from '@liuyang0826/auto-animate'
+import type { Plugin, Directive } from 'vue'
 import { CrossFlip } from './CrossFlip'
-
-export function useAutoAnimate(options?: Options) {
-  const rootRef = ref<Element | null>(null)
-  const animatorRef = ref<ReturnType<typeof autoAnimate> | null>(null)
-
-  watch(
-    rootRef,
-    (root) => {
-      if (root) {
-        animatorRef.value = autoAnimate(root, options)
-      }
-    },
-    { immediate: true }
-  )
-
-  return {
-    rootRef,
-    animatorRef,
-  }
-}
+import { useAutoAnimate } from './useAutoAnimate'
 
 export const vAutoAnimate: Directive = {
   mounted: (el: HTMLElement, binding: { value: Options }) => {
@@ -30,7 +10,7 @@ export const vAutoAnimate: Directive = {
   },
 }
 
-export { CrossFlip }
+export { CrossFlip, useAutoAnimate }
 
 export function autoAnimatePlugin(): Plugin {
   return {
